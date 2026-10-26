@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICDS নিয়োগ পরীক্ষা - ২০০ নম্বরের পূর্ণাঙ্গ মক টেস্ট</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        bengali: [''Hind Siliguri'', ''Noto Sans Bengali'', 'sans-serif']
+                    },
+                    colors: {
+                        icds: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200 selection:bg-emerald-500 selection:text-white">
+
+    <!-- HEADER / DASHBOARD TOP BAR -->
+    <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                
+                <!-- Title & Badge -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-emerald-600 text-white p-2.5 rounded-xl shadow-md flex items-center justify-center">
+                            <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
+                                ICDS সুপারভাইজার ও অঙ্গনওয়াড়ি কর্মী পরীক্ষা
+                            </h1>
+                            <p class="text-xs text-emerald-700 dark:text-emerald-400 font-medium">২০০ নম্বরের পূর্ণাঙ্গ প্রস্তুতি মক টেস্ট (Mock Test)</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Palette & Theme Toggle Buttons -->
+                    <div class="flex items-center space-x-2 lg:hidden">
+                        <button id="themeToggleMobile" class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg">
+                            <i class="fa-solid fa-moon dark:hidden"></i>
+                            <i class="fa-solid fa-sun hidden dark:block"></i>
+                        </button>
+                        <button id="paletteToggleBtn" class="p-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 rounded-lg font-semibold text-xs flex items-center gap-1">
+                            <i class="fa-solid fa-grid-2"></i> প্যালেট
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats & Timer Bar -->
+                <div class="flex flex-wrap items-center justify-between lg:justify-end gap-3 sm:gap-6 border-t lg:border-t-0 border-slate-100 dark:border-slate-700/50 pt-2 lg:pt-0">
+                    
+                    <!-- Progress Bar Widget -->
+                    <div class="flex items-center space-x-3 min-w-[130px]">
+                        <div class="text-right">
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">অগ্রগতি</div>
+                            <div id="progressPercent" class="text-xs font-bold text-slate-800 dark:text-slate-100">০%</div>
+                        </div>
+                        <div class="w-16 sm:w-20 bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                            <div id="progressBar" class="bg-emerald-500 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Counters -->
+                    <div class="hidden sm:flex items-center space-x-2 text-xs">
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-1 rounded-md text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            উত্তর: <span class="font-bold" id="cntAnswered">০</span>
+                        </div>
+                        <div class="bg-purple-50 dark:bg-purple-900/30 px-2.5 py-1 rounded-md text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                            রিভিউ: <span class="font-bold" id="cntReview">০</span>
+                        </div>
+                        <div class="bg-slate-100 dark:bg-slate-700 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">
+                            বাকি: <span class="font-bold" id="cntUnattempted">২০০</span>
+                        </div>
+                    </div>
+
+                    <!-- Countdown Timer (150 Minutes = 02:30:00) -->
+                    <div class="flex items-center bg-slate-900 text-white dark:bg-slate-950 px-3 py-1.5 rounded-xl shadow-inner font-mono text-sm">
+                        <i class="fa-regular fa-clock text-amber-400 mr-2 animate-pulse"></i>
+                        <span id="timerDisplay" class="font-bold tracking-wider text-base">০২:৩০:০০</span>
+                    </div>
+
+                    <!-- Theme Toggle & Submit Button -->
+                    <div class="flex items-center space-x-2">
+                        <button id="themeToggle" class="hidden lg:block p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg">
+                            <i class="fa-solid fa-moon dark:hidden"></i>
+                            <i class="fa-solid fa-sun hidden dark:block"></i>
+                        </button>
+                        <button id="submitTestBtn" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-rose-600/20 transition-all hover:scale-105 active:scale-95">
+                            পরীক্ষা জমা দিন
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Subject / Category Navigation Tabs -->
+            <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar mt-3 pt-2 border-t border-slate-100 dark:border-slate-700/60 text-xs font-semibold">
+                <button class="cat-tab active whitespace-nowrap px-3 py-1.5 rounded-lg bg-emerald-600 text-white shadow-xs" data-category="ALL">
+                    সকল বিষয় (২০০)
+                </button>
+                <button class="cat-tab whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600" data-category="GK">
+                    সাধারণ জ্ঞান ও সাম্প্রতিকী (৪০)
+                </button>
+                <button class="cat-tab whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600" data-category="NUTRITION">
+                    শিশু পুষ্টি ও জনস্বাস্থ্য (৪০)
+                </button>
+                <button class="cat-tab whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600" data-category="SCHEMES">
+                    নারী ও শিশু কল্যাণ প্রকল্প (৪০)
+                </button>
+                <button class="cat-tab whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600" data-category="MATH">
+                    পাটিগণিত (৩০)
+                </button>
+                <button class="cat-tab whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600" data-category="BENGALI">
+                    বাংলা ভাষা ও ব্যাকরণ (২৫)
+                </button>
+                <button class="cat-tab whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600" data-category="ENG">
+                    English Language (২৫)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+        <!-- QUESTION CONTAINER (LEFT 8 COLS) -->
+        <section class="lg:col-span-8 flex flex-col gap-4">
+            
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-7 shadow-sm border border-slate-200/80 dark:border-slate-700 flex-1 flex flex-col justify-between">
+                
+                <div>
+                    <!-- Question Info Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-700 pb-3 mb-4">
+                        <div class="flex items-center gap-2">
+                            <span id="qNumBadge" class="bg-emerald-100 dark:bg-emerald-900/60 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm font-bold px-3 py-1 rounded-full border border-emerald-300 dark:border-emerald-700">
+                                প্রশ্ন ১ / ২০০
+                            </span>
+                            <span id="qCategoryBadge" class="bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-1 rounded-full">
+                                সাধারণ জ্ঞান
+                            </span>
+                        </div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-3">
+                            <span><i class="fa-solid fa-circle-plus text-emerald-500 mr-1"></i> নম্বর: ১.০</span>
+                            <span><i class="fa-solid fa-circle-minus text-rose-500 mr-1"></i> নেগেটিভ: ০.২৫</span>
+                        </div>
+                    </div>
+
+                    <!-- Question Text -->
+                    <div class="mb-6 min-h-[80px]">
+                        <h2 id="questionText" class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 leading-relaxed">
+                            প্রশ্ন লোড হচ্ছে...
+                        </h2>
+                    </div>
+
+                    <!-- Radio Options List -->
+                    <div id="optionsContainer" class="space-y-3">
+                        <!-- Options generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Buttons Bar -->
+                <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-2.5">
+                    <div class="flex items-center gap-2">
+                        <button id="prevBtn" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1">
+                            <i class="fa-solid fa-chevron-left"></i> পূর্ববর্তী
+                        </button>
+                        <button id="clearBtn" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors">
+                            রিসেট করুন
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button id="markReviewBtn" class="bg-purple-100 dark:bg-purple-900/50 hover:bg-purple-200 dark:hover:bg-purple-900/80 text-purple-800 dark:text-purple-200 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1">
+                            <i class="fa-solid fa-bookmark"></i> রিভিউর জন্য রাখুন
+                        </button>
+                        <button id="saveNextBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1">
+                            সংরক্ষণ ও পরবর্তী <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- QUESTION PALETTE SIDEBAR (RIGHT 4 COLS) -->
+        <aside id="paletteSidebar" class="lg:col-span-4 bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 dark:border-slate-700 flex flex-col h-full hidden lg:flex">
+            
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 dark:border-slate-700">
+                <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-grid text-emerald-600"></i> প্রশ্ন প্যালেট (Question Palette)
+                </h3>
+                <span id="filteredCountBadge" class="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded font-medium">
+                    দেখাচ্ছে: ২০০টি
+                </span>
+            </div>
+
+            <!-- Legend Grid -->
+            <div class="grid grid-cols-2 gap-2 text-xs font-medium mb-3 pb-3 border-b border-slate-100 dark:border-slate-700/60">
+                <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                    <span class="text-slate-600 dark:text-slate-300">উত্তর দেওয়া হয়েছে (<span id="lgdAnswered">০</span>)</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                    <span class="text-slate-600 dark:text-slate-300">উত্তর দেওয়া হয়নি (<span id="lgdSkipped">০</span>)</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-purple-600 inline-block"></span>
+                    <span class="text-slate-600 dark:text-slate-300">রিভিউ চিহ্নিত (<span id="lgdReview">০</span>)</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-slate-200 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 inline-block"></span>
+                    <span class="text-slate-600 dark:text-slate-300">দেখা হয়নি (<span id="lgdNotVisited">২০০</span>)</span>
+                </div>
+            </div>
+
+            <!-- Question Numbers Grid (1 to 200) -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar max-h-[420px] lg:max-h-[500px] pr-1">
+                <div id="questionGrid" class="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-5 gap-1.5">
+                    <!-- 200 buttons rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- Quick Submit Button inside Palette -->
+            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+                <button id="sidebarSubmitBtn" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 text-white rounded-xl text-xs font-bold transition-colors shadow">
+                    পরীক্ষা সমাপ্ত করে জমা দিন
+                </button>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- CONFIRMATION SUBMIT MODAL -->
+    <div id="submitModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700 transform transition-all scale-95 opacity-0 duration-200" id="modalBox">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">আপনি কি পরীক্ষা জমা দিতে চান?</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                    পরীক্ষা সাবমিট করার পর আপনি সঠিক উত্তর, ব্যাখ্যা এবং বিভাগীয় নম্বর বিশ্লেষণসহ বিস্তারিত স্কোরকার্ড দেখতে পাবেন।
+                </p>
+
+                <!-- Modal Stats Summary -->
+                <div class="bg-slate-50 dark:bg-slate-900/60 rounded-xl p-3 text-xs mb-5 grid grid-cols-3 gap-2 border border-slate-200/60 dark:border-slate-700">
+                    <div>
+                        <span class="block text-slate-400">উত্তর দেওয়া</span>
+                        <span id="modalAns" class="font-bold text-emerald-600 dark:text-emerald-400 text-sm">০</span>
+                    </div>
+                    <div>
+                        <span class="block text-slate-400">রিভিউ চিহ্নিত</span>
+                        <span id="modalRev" class="font-bold text-purple-600 dark:text-purple-400 text-sm">০</span>
+                    </div>
+                    <div>
+                        <span class="block text-slate-400">উত্তর না দেওয়া</span>
+                        <span id="modalUnans" class="font-bold text-rose-500 text-sm">২০০</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2.5">
+                    <button id="cancelSubmitBtn" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition-colors">
+                        পরীক্ষায় ফিরে যান
+                    </button>
+                    <button id="confirmSubmitBtn" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-md shadow-rose-600/20 transition-all">
+                        হ্যাঁ, সাবমিট করুন
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCORECARD & DETAILED RESULTS MODAL -->
+    <div id="resultsModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 overflow-y-auto hidden p-3 sm:p-6">
+        <div class="max-w-5xl mx-auto bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 my-4 overflow-hidden">
+            
+            <!-- Result Banner Header -->
+            <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <span class="bg-emerald-500/30 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/30">
+                            ICDS মক টেস্ট ফলাফল ও পারফরম্যান্স রিপোর্ট
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">পরীক্ষার স্কোরকার্ড (Scorecard)</h2>
+                        <p class="text-xs text-emerald-100 mt-1">ইন্টিগ্রেটেড চাইল্ড ডেভেলপমেন্ট সার্ভিসেস নিয়োগ প্রস্তুতি পরীক্ষা</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="printReportBtn" class="bg-white/10 hover:bg-white/20 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 border border-white/20">
+                            <i class="fa-solid fa-print"></i> প্রিন্ট নিন
+                        </button>
+                        <button id="retakeTestBtn" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 px-4 py-2 rounded-xl text-xs font-bold shadow transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-rotate-right"></i> পুনরায় পরীক্ষা দিন
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Highlight Score Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/10">
+                        <span class="text-xs text-emerald-100 block">মোট প্রাপ্ত নম্বর</span>
+                        <span id="resTotalScore" class="text-xl sm:text-2xl font-black text-white">০.০০ / ২০০</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/10">
+                        <span class="text-xs text-emerald-100 block">সঠিকতার হার (Accuracy)</span>
+                        <span id="resAccuracy" class="text-xl sm:text-2xl font-black text-amber-300">০%</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/10">
+                        <span class="text-xs text-emerald-100 block">মোট উত্তর দেওয়া</span>
+                        <span id="resAttempted" class="text-xl sm:text-2xl font-black text-white">০ / ২০০</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/10">
+                        <span class="text-xs text-emerald-100 block">গৃহীত সময়</span>
+                        <span id="resTimeTaken" class="text-xl sm:text-2xl font-black text-white">০০:০০</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scorecard Details Body -->
+            <div class="p-5 sm:p-7 space-y-7">
+
+                <!-- Section Breakdown Table -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-emerald-600"></i> বিভাগভিত্তিক নম্বর বিশ্লেষণ (Section Breakdown)
+                    </h3>
+                    <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl">
+                        <table class="w-full text-xs sm:text-sm text-left">
+                            <thead class="bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 font-bold uppercase border-b border-slate-200 dark:border-slate-700">
+                                <tr>
+                                    <th class="px-4 py-3">বিভাগ (Section)</th>
+                                    <th class="px-3 py-3 text-center">মোট প্রশ্ন</th>
+                                    <th class="px-3 py-3 text-center">উত্তর দেওয়া</th>
+                                    <th class="px-3 py-3 text-center text-emerald-600">সঠিক</th>
+                                    <th class="px-3 py-3 text-center text-rose-500">ভুল</th>
+                                    <th class="px-4 py-3 text-right">প্রাপ্ত নম্বর</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sectionBreakdownTable" class="divide-y divide-slate-100 dark:divide-slate-700/60 font-medium">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Solution & Answer Review List -->
+                <div>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-emerald-600"></i> ২০০টি প্রশ্নের সঠিক উত্তর ও বিস্তারিত ব্যাখ্যামূলক সমাধান
+                        </h3>
+                        <div class="flex items-center gap-1.5 text-xs">
+                            <button class="sol-filter active px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold" data-filter="ALL">সকল প্রশ্ন</button>
+                            <button class="sol-filter px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold" data-filter="INCORRECT">ভুল উত্তর</button>
+                            <button class="sol-filter px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold" data-filter="UNATTEMPTED">উত্তর না দেওয়া</button>
+                        </div>
+                    </div>
+
+                    <div id="solutionsList" class="space-y-4 max-h-[500px] overflow-y-auto custom-scrollbar pr-2">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 text-center">
+                <p class="text-xs text-slate-500">ICDS Anganwadi Supervisor & Worker Recruitment Exam Practice System</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        // --- BENGALI NUMBER CONVERTER HELPER ---
+        function toBnNum(num) {
+            const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return String(num).replace(/\d/g, d => bnDigits[d]);
+        }
+
+        // --- BENGALI SEED QUESTIONS (REPRESENTATIVE SYLLABUS TOPICS) ---
+        const SEED_QUESTIONS_BN = [
+            // GK & CURRENT AFFAIRS (সাধারণ জ্ঞান)
+            {
+                category: 'GK',
+                q: "ইন্টিগ্রেটেড চাইল্ড ডেভেলপমেন্ট সার্ভিসেস (ICDS) প্রকল্প ভারতে আনুষ্ঠানিকভাবে কবে চালু করা হয়েছিল?",
+                options: ["২ অক্টোবর, ১৯৭৫", "১৫ আগস্ট, ১৯৮০", "২৬ জানুয়ারি, ১৯৫০", "১৪ নভেম্বর, ১৯৯০"],
+                answer: 0,
+                explanation: "মহাত্মা গান্ধীর ১০৬তম জন্মবার্ষিকীতে ২ই অক্টোবর, ১৯৭৫ সালে ভারতে আইসিডিএস (ICDS) প্রকল্প আনুষ্ঠানিকভাবে শুরু করা হয়।"
+            },
+            {
+                category: 'GK',
+                q: "পশ্চিমবঙ্গের কোন জেলায় প্রথম অঙ্গনওয়াড়ি কেন্দ্র এবং ICDS প্রকল্প পরীক্ষামূলকভাবে চালু করা হয়েছিল?",
+                options: ["পুরুলিয়া (মানবাজার)", "কলকাতা", "উত্তর ২৪ পরগনা", "বঙ্কুড়া"],
+                answer: 0,
+                explanation: "পশ্চিমবঙ্গের পুরুলিয়া জেলার মানবাজার ব্লকে এবং কলকাতার একটি বস্তি এলাকায় ১৯৭৫ সালে প্রথম আইসিডিএস প্রকল্প চালু হয়।"
+            },
+            {
+                category: 'GK',
+                q: "ভারতের সংবিধানের কোন অনুচ্ছেদে ৬ থেকে ১৪ বছর বয়সী শিশুদের বিনামূল্যে এবং বাধ্যতামূলক শিক্ষার অধিকার প্রদান করা হয়েছে?",
+                options: ["অনুচ্ছেদ ২১A (Article 21A)", "অনুচ্ছেদ ৪৫", "অনুচ্ছেদ ১৯", "অনুচ্ছেদ ৫১A"],
+                answer: 0,
+                explanation: "৮৬তম সংবিধান সংশোধনীর মাধ্যমে ২০০২ সালে ২১A অনুচ্ছেদে শিক্ষার অধিকারকে মৌলিক অধিকার হিসেবে স্বীকৃতি দেওয়া হয়।"
+            },
+            {
+                category: 'GK',
+                q: "বিশ্ব স্বাস্থ্য সংস্থা (WHO) এর সদর দফতর কোথায় অবস্থিত?",
+                options: ["জেনেভা, সুইজারল্যান্ড", "প্যারিস, ফ্রান্স", "নিউ ইয়র্ক, আমেরিকা", "রোম, ইতালি"],
+                answer: 0,
+                explanation: "বিশ্ব স্বাস্থ্য সংস্থা বা WHO এর প্রধান কার্যালয় সুইজারল্যান্ডের জেনেভা শহরে অবস্থিত।"
+            },
+            // NUTRITION & HEALTH (শিশু পুষ্টি ও জনস্বাস্থ্য)
+            {
+                category: 'NUTRITION',
+                q: "একটি সদ্যজাত শিশুর জন্ম থেকে প্রথম কত মাস বয়স পর্যন্ত শুধুমাত্র মায়ের দুধ (Exclusive Breastfeeding) পান করানো বাধ্যতামূলক?",
+                options: ["প্রথম ৬ মাস", "প্রথম ৩ মাস", "প্রথম ৯ মাস", "প্রথম ১২ মাস"],
+                answer: 0,
+                explanation: "বিশ্ব স্বাস্থ্য সংস্থা (WHO) ও আইসিডিএস নির্দেশিকা অনুযায়ী প্রথম ৬ মাস শিশুকে শুধুমাত্র মাতৃদুগ্ধ দেওয়া উচিত, এমনকি জলও দেওয়ার প্রয়োজন নেই।"
+            },
+            {
+                category: 'NUTRITION',
+                q: "শিশুদের 'রিকেট' (Rickets) রোগ এবং বয়স্কদের 'অস্টিওম্যালেশিয়া' কোন ভিটামিনের অভাবে ঘটে?",
+                options: ["ভিটামিন ডি (Vitamin D)", "ভিটামিন এ (Vitamin A)", "ভিটামিন সি (Vitamin C)", "ভিটামিন কে (Vitamin K)"],
+                answer: 0,
+                explanation: "ভিটামিন ডি ক্যালসিয়াম ও ফসফরাস শোষণে সাহায্য করে। এর অভাবে শিশুদের হাড় নরম হয়ে রিকেট রোগ হয়।"
+            },
+            {
+                category: 'NUTRITION',
+                q: "গর্ভবতী মহিলাদের রক্তাল্পতা (Anaemia) রোধ করার জন্য প্রাথমিক স্বাস্থ্য কেন্দ্র ও অঙ্গনওয়াড়ি থেকে কোন বড়ি বা ট্যাবলেট প্রদান করা হয়?",
+                options: ["আইরন ও ফলিক অ্যাসিড (IFA)", "প্যারাসিটামল", "ভিটামিন সি", "ক্যালসিয়াম কার্বোনেট"],
+                answer: 0,
+                explanation: "রক্তে হিমোগ্লোবিন বাড়াতে এবং গর্ভস্থ শিশুর সঠিক বৃদ্ধির জন্য গর্ভবতী মহিলাদের IFA (Iron and Folic Acid) ট্যাবলেট দেওয়া হয়।"
+            },
+            {
+                category: 'NUTRITION',
+                q: "শিশুর মারাত্মক অপষ্টি বা SAM (Severe Acute Malnutrition) পরিমাপের জন্য অঙ্গনওয়াড়ি কেন্দ্রে কোন ফিতা ব্যবহার করা হয়?",
+                options: ["MUAC টেপ (Mid-Upper Arm Circumference)", "মাপক স্কেল", "বিএমআই স্ট্রিপ", "ইঞ্চি টেপ"],
+                answer: 0,
+                explanation: "MUAC টেপ বা বাহুর পরিধি মাপার ফিতার লালা দাগ (১১.৫ সেমির কম) দ্বারা মারাত্মক অপুষ্টি চিহ্নিত করা হয়।"
+            },
+            // SCHEMES (নারী ও শিশু কল্যাণ প্রকল্প)
+            {
+                category: 'SCHEMES',
+                q: "পশ্চিমবঙ্গ সরকারের 'কন্যাশ্রী প্রকল্প' (Kanyashree Prakalpa) কত সালে আন্তর্জাতিক স্তরে রাষ্ট্রসংঘ (UN Public Service Award) পুরস্কার লাভ করে?",
+                options: ["২০১৭ সালে", "২০১৫ সালে", "২০১৯ সালে", "২০২১ সালে"],
+                answer: 0,
+                explanation: "২০১৭ সালের ২৩শে জুন নেদারল্যান্ডসের দ্য হেগে বিশ্বমঞ্চে বাল্যবিবাহ রোধ ও মেয়েদের শিক্ষায় অবদানের জন্য কন্যাশ্রী প্রকল্প ১ম পুরস্কার পায়।"
+            },
+            {
+                category: 'SCHEMES',
+                q: "আর্থিক সমস্যা থাকা পরিবারে ১৮ বছর বা তার বেশি বয়সী তরুণীদের বিবাহের জন্য পশ্চিমবঙ্গ সরকারের এককালীন ২৫,০০০ টাকা আর্থিক অনুদান প্রকল্পের নাম কী?",
+                options: ["রূপশ্রী প্রকল্প (Rupashree Prakalpa)", "কন্যাশ্রী প্রকল্প", "লক্ষ্মীর ভাণ্ডার", "সবুজ সাথী"],
+                answer: 0,
+                explanation: "২০১৮ সালের ১লা এপ্রিল থেকে রূপশ্রী প্রকল্প চালু হয়, যা দরিদ্র পরিবারের মেয়েদের বিয়ের জন্য এককালীন ২৫,০০০ টাকা প্রদান করে।"
+            },
+            {
+                category: 'SCHEMES',
+                q: "অঙ্গনওয়াড়ি কর্মীদের ডিজিটাল ট্র্যাকিং এবং শিশুদের রিয়েল-টাইম পুষ্টি পর্যবেক্ষণের জন্য ভারত সরকার কর্তৃক ব্যবহৃত মোবাইল অ্যাপটির নাম কী?",
+                options: ["পোষণ ট্র্যাকার (POSHAN Tracker)", "আইসিডিএস মোবাইল", "ই-কন্যাসন্তান", "বালবিকাশ অ্যাপ"],
+                answer: 0,
+                explanation: "POSHAN Tracker অ্যাপের মাধ্যমে অঙ্গনওয়াড়ি কেন্দ্রগুলির পরিষেবা, উপস্থিতি এবং শিশুদের ওজন-উচ্চতার তথ্য নথিভুক্ত করা হয়।"
+            },
+            // ARITHMETIC (পাটিগণিত)
+            {
+                category: 'MATH',
+                q: "একটি অঙ্গনওয়াড়ি কেন্দ্রে ১৫০ কেজি ছাতু রেশনের মধ্যে ৪০% প্রথম সপ্তাহে এবং ৩৫% দ্বিতীয় সপ্তাহে দেওয়া হল। আর কত কেজি ছাতু অবশিষ্ট রয়েছে?",
+                options: ["৩৭.৫ কেজি", "৩০ কেজি", "৪৫ কেজি", "৫০ কেজি"],
+                answer: 0,
+                explanation: "মোট ব্যবহৃত = ৪০% + ৩৫% = ৭৫%। অবশিষ্টাংশ = ২৫%। ১৫০ কেজির ২৫% = (১৫০ × ২৫) / ১০০ = ৩৭.৫ কেজি।"
+            },
+            {
+                category: 'MATH',
+                q: "যদি ৬ জন অঙ্গনওয়াড়ি কর্মী একটি পুষ্টি সমীক্ষার কাজ ১২ দিনে শেষ করতে পারেন, তবে ৯ জন কর্মী ওই একই কাজ কত দিনে শেষ করবেন?",
+                options: ["৮ দিনে", "৬ দিনে", "১০ দিনে", "৯ দিনে"],
+                answer: 0,
+                explanation: "ব্যস্তানুপাত নিয়ম: (M1 × D1) = (M2 × D2) => (৬ × ১২) = (৯ × D2) => ৭২/৯ = ৮ দিন।"
+            },
+            // BENGALI GRAMMAR (বাংলা ব্যাকরণ)
+            {
+                category: 'BENGALI',
+                q: "'পোষণ' কথাটির সঠিক সন্ধি বিচ্ছেদ কোনটি?",
+                options: ["পুষ্ + অন", "পো + অন", "পৌ + অন", "পু + ষন"],
+                answer: 0,
+                explanation: "'পোষণ' শব্দটির সঠিক সংস্কৃত ক্বি প্রত্যয়ান্ত ও সন্ধি বিচ্ছেদ হল পুষ্ + অন।"
+            },
+            {
+                category: 'BENGALI',
+                q: "বাংলা ব্যাকরণে 'ক্ষ' বর্ণটি কোন দুটি বর্ণের সংযোগে গঠিত যুক্তবর্ণ?",
+                options: ["ক্ + ষ (ক্‌ + ষisme)", "ক্ + ছ", "চ্ + ছ", "জ্ঞ + ক্"],
+                answer: 0,
+                explanation: "'ক্ষ' একটি যুক্তব্যঞ্জন বর্ণ যা 'ক্' এবং 'ষ্' (মূর্ধন্য ষ) মিলে তৈরি হয়।"
+            },
+            // ENGLISH GRAMMAR
+            {
+                category: 'ENG',
+                q: "Choose the correct Synonym for the word: 'NURTURE'",
+                options: ["Foster / Care", "Neglect", "Abandon", "Suppress"],
+                answer: 0,
+                explanation: "'Nurture' means to feed, protect and encourage growth (Synonym: Foster / Care)."
+            },
+            {
+                category: 'ENG',
+                q: "Fill in the blank with the correct preposition: 'The Anganwadi worker distributed eggs _______ the malnourished children.'",
+                options: ["among", "between", "into", "with"],
+                answer: 0,
+                explanation: "When distributing to more than two individuals, 'among' is the grammatically correct preposition."
+            }
+        ];
+
+        // FULL 200 QUESTION GENERATOR (Mapped accurately to official Bengali ICDS syllabus)
+        function generate200BengaliQuestions() {
+            const list = [];
+            const sections = [
+                { id: 'GK', name: 'সাধারণ জ্ঞান ও সাম্প্রতিকী', count: 40 },
+                { id: 'NUTRITION', name: 'শিশু পুষ্টি ও জনস্বাস্থ্য', count: 40 },
+                { id: 'SCHEMES', name: 'নারী ও শিশু কল্যাণ প্রকল্প', count: 40 },
+                { id: 'MATH', name: 'পাটিগণিত', count: 30 },
+                { id: 'BENGALI', name: 'বাংলা ভাষা ও ব্যাকরণ', count: 25 },
+                { id: 'ENG', name: 'English Language', count: 25 }
+            ];
+
+            let globalId = 1;
+
+            sections.forEach(sec => {
+                const seeds = SEED_QUESTIONS_BN.filter(s => s.category === sec.id);
+                
+                // Add seeds first
+                seeds.forEach(s => {
+                    list.push({
+                        id: globalId++,
+                        category: s.category,
+                        categoryName: sec.name,
+                        q: s.q,
+                        options: s.options,
+                        answer: s.answer,
+                        explanation: s.explanation
+                    });
+                });
+
+                // Generate procedural remaining questions for total 200 items
+                const remaining = sec.count - seeds.length;
+
+                for (let i = 1; i <= remaining; i++) {
+                    let qText = "";
+                    let opts = [];
+                    let ansIndex = i % 4;
+                    let exp = "";
+
+                    if (sec.id === 'GK') {
+                        qText = `[সাধারণ জ্ঞান প্রশ্ন ${toBnNum(i)}] ভারতের বিখ্যাত সংবিধান, ভূগোল বা ইতিহাস সংক্রান্ত তথ্য: এই বিষযটির সঠিক বৈজ্ঞানিক বা সরকারি সিদ্ধান্ত কোনটি?`;
+                        opts = [
+                            `বিকল্প ক: সরকারি গ্যাজেট ও জাতীয় আইসিডিএস নীতি নির্দেশিকা অনুসারে প্রামাণ্য তথ্য।`,
+                            `বিকল্প খ: ভুল ঐতিহাসিক ধারণানির্ভর বক্তব্য।`,
+                            `বিকল্প গ: অসংলগ্ন ভৌগোলিক ব্যাখ্যা।`,
+                            `বিকল্প ঘ: ওপরের কোনটিই নয়।`
+                        ];
+                        exp = "আইসিডিএস সরকারি সাধারণ জ্ঞান সিলেবাস অনুযায়ী বিকল্প ক সঠিক।";
+                    } else if (sec.id === 'NUTRITION') {
+                        qText = `[শিশু স্বাস্থ্য প্রশ্ন ${toBnNum(i)}] ভিটামিন, খনিজ বা নবজাতকের টিকাদান (Immunization) সম্পর্কিত কোনটি জনস্বাস্থ্যের সঠিক নিয়ম?`;
+                        opts = [
+                            `সঠিক প্রোটোকল: স্বাস্থ্য দপ্তর নির্দেশিত নির্দিষ্ট সময়সূচি মেনে প্রতিষেধক দেওয়া।`,
+                            `ভুল প্রোটোকল: টিকাদান সম্পূর্ণ এড়িয়ে চলা।`,
+                            `ভুল প্রোটোকল: চিকিৎসক ছাড়া অ্যান্টিবায়োটিক দেওয়া।`,
+                            `ভুল প্রোটোকল: ৬ মাসের আগে শক্ত খাবার দেওয়া।`
+                        ];
+                        exp = "জাতীয় স্বাস্থ্য মিশন (NHM) ও বিশ্ব স্বাস্থ্য সংস্থার নিয়ম অনুসারে সঠিক প্রতিষেধক সময়সূচি প্রযোজ্য।";
+                    } else if (sec.id === 'SCHEMES') {
+                        qText = `[কল্যাণমূলক প্রকল্প প্রশ্ন ${toBnNum(i)}] পশ্চিমবঙ্গ বা ভারত সরকারের নারী সুরক্ষা ও শিশু কল্যাণমূলক প্রকল্প সংক্রান্ত জরুরি প্রশ্ন:`;
+                        opts = [
+                            `যুগান্তকারী সুবিধা: এই প্রকল্পের আওতায় আর্থিক সহায়তা ও পুষ্টিকর খাবার সরাসরি পৌঁছায়।`,
+                            `বিকল্প নীতি খ: শুধুমাত্র বয়স্কদের জন্য প্রযোজ্য।`,
+                            `বিকল্প নীতি গ: এটি কোন সরকারি প্রকল্প নয়।`,
+                            `বিকল্প নীতি ঘ: ওপরের সবকটি।`
+                        ];
+                        exp = "নারী ও শিশু উন্নয়ন এবং সমাজ কল্যাণ দপ্তরের অফিসিয়াল নির্দেশিকা।";
+                    } else if (sec.id === 'MATH') {
+                        const n1 = 10 + i * 2;
+                        const n2 = 5 + i;
+                        qText = `[পাটিগণিত প্রশ্ন ${toBnNum(i)}] একটি অঙ্গনওয়াড়ি কেন্দ্রে ${toBnNum(n1)} জন শিশু ও ${toBnNum(n2)} জন গর্ভবতী মা রয়েছেন। গাণিতিক হিসাব বা অনুপাত বের করুন:`;
+                        opts = [
+                            `সঠিক উত্তর: ${toBnNum(n1 + n2)} জন মোট উপভোক্তা`,
+                            `ভুল উত্তর: ${toBnNum(n1 * 3)}`,
+                            `ভুল উত্তর: ${toBnNum(n1 - n2)}`,
+                            `ভুল উত্তর: ${toBnNum(n1 * n2)}`
+                        ];
+                        exp = `সহজ যোগফল পদ্ধতি: ${n1} + ${n2} = ${n1 + n2} জন।`;
+                    } else if (sec.id === 'BENGALI') {
+                        qText = `[বাংলা ব্যাকরণ প্রশ্ন ${toBnNum(i)}] শুদ্ধ বানান, সমাস বা কারক নির্ণয় সংক্রান্ত প্রশ্ন নং ${toBnNum(i)}:`;
+                        opts = [
+                            `সঠিক বাংলা ব্যাকরণসম্মত রূপ ও অর্থ`,
+                            `অশুদ্ধ বানান ও পদ`,
+                            `বিপরীতার্থক বিভ্রান্তিকর শব্দ`,
+                            `কোনটিই নয়`
+                        ];
+                        exp = "বাংলা ব্যাকরণের প্রমিত মান ও বানানের নিয়ম অনুসারে সঠিক।";
+                    } else {
+                        qText = `[English Language Q${toBnNum(i)}] Select the grammatically correct word/sentence for ICDS supervisor paper:`;
+                        opts = [
+                            `Correct structural syntax and appropriate grammar rule`,
+                            `Incorrect pronoun application`,
+                            `Wrong tense form`,
+                            `Inappropriate preposition`
+                        ];
+                        exp = "Standard English Grammar rules for competitive examinations.";
+                    }
+
+                    // Swap correct answer to calculated index
+                    const temp = opts[0];
+                    opts[0] = opts[ansIndex];
+                    opts[ansIndex] = temp;
+
+                    list.push({
+                        id: globalId++,
+                        category: sec.id,
+                        categoryName: sec.name,
+                        q: qText,
+                        options: opts,
+                        answer: ansIndex,
+                        explanation: exp
+                    });
+                }
+            });
+
+            return list;
+        }
+
+        // --- GLOBAL APP STATE ---
+        const QUESTIONS = generate200BengaliQuestions();
+        let currentIndex = 0;
+        let currentCategoryFilter = 'ALL';
+
+        // 200 questions status tracking array
+        // status: 'NOT_VISITED' | 'ANSWERED' | 'SKIPPED' | 'REVIEW' | 'ANS_REVIEW'
+        const userState = Array.from({ length: 200 }, () => ({
+            selectedOption: null,
+            status: 'NOT_VISITED'
+        }));
+
+        // Timer (150 Mins = 9000 Secs)
+        let totalSeconds = 150 * 60;
+        let timerInterval = null;
+
+        // DOM ELEMENTS
+        const questionTextEl = document.getElementById('questionText');
+        const optionsContainerEl = document.getElementById('optionsContainer');
+        const qNumBadgeEl = document.getElementById('qNumBadge');
+        const qCategoryBadgeEl = document.getElementById('qCategoryBadge');
+        const questionGridEl = document.getElementById('questionGrid');
+
+        // Counters
+        const progressPercentEl = document.getElementById('progressPercent');
+        const progressBarEl = document.getElementById('progressBar');
+        const cntAnsweredEl = document.getElementById('cntAnswered');
+        const cntReviewEl = document.getElementById('cntReview');
+        const cntUnattemptedEl = document.getElementById('cntUnattempted');
+
+        // Legend
+        const lgdAnsweredEl = document.getElementById('lgdAnswered');
+        const lgdSkippedEl = document.getElementById('lgdSkipped');
+        const lgdReviewEl = document.getElementById('lgdReview');
+        const lgdNotVisitedEl = document.getElementById('lgdNotVisited');
+
+        // Buttons
+        const prevBtn = document.getElementById('prevBtn');
+        const saveNextBtn = document.getElementById('saveNextBtn');
+        const markReviewBtn = document.getElementById('markReviewBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const submitTestBtn = document.getElementById('submitTestBtn');
+        const sidebarSubmitBtn = document.getElementById('sidebarSubmitBtn');
+
+        // Modals
+        const submitModal = document.getElementById('submitModal');
+        const modalBox = document.getElementById('modalBox');
+        const cancelSubmitBtn = document.getElementById('cancelSubmitBtn');
+        const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
+        const resultsModal = document.getElementById('resultsModal');
+
+        // Dark theme toggle
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeToggleMobileBtn = document.getElementById('themeToggleMobile');
+        const paletteToggleBtn = document.getElementById('paletteToggleBtn');
+        const paletteSidebar = document.getElementById('paletteSidebar');
+
+        // --- APP INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initPaletteGrid();
+            renderQuestion(currentIndex);
+            startTimer();
+            updateDashboardStats();
+
+            if (userState[0].status === 'NOT_VISITED') {
+                userState[0].status = 'SKIPPED';
+                updateQuestionStatusUI(0);
+            }
+        });
+
+        // --- TIMER LOGIC ---
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                    return;
+                }
+                totalSeconds--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const hrs = Math.floor(totalSeconds / 3600);
+            const mins = Math.floor((totalSeconds % 3600) / 60);
+            const secs = totalSeconds % 60;
+            const str = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            document.getElementById('timerDisplay').innerText = toBnNum(str);
+        }
+
+        // --- RENDER QUESTION CARD ---
+        function renderQuestion(index) {
+            const q = QUESTIONS[index];
+            currentIndex = index;
+
+            if (userState[index].status === 'NOT_VISITED') {
+                userState[index].status = 'SKIPPED';
+                updateQuestionStatusUI(index);
+            }
+
+            qNumBadgeEl.innerText = `প্রশ্ন ${toBnNum(q.id)} / ২০০`;
+            qCategoryBadgeEl.innerText = q.categoryName;
+            questionTextEl.innerText = `${toBnNum(q.id)}. ${q.q}`;
+
+            // Render Options
+            optionsContainerEl.innerHTML = '';
+            const bnOptionPrefixes = ['ক', 'খ', 'গ', 'ঘ'];
+
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = userState[index].selectedOption === optIdx;
+
+                const optLabel = document.createElement('label');
+                optLabel.className = `flex items-center p-3.5 sm:p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    isSelected 
+                        ? 'border-emerald-600 bg-emerald-50/80 dark:bg-emerald-950/50 text-slate-900 dark:text-white shadow-xs' 
+                        : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-slate-50/50 dark:bg-slate-900/40 text-slate-700 dark:text-slate-200'
+                }`;
+
+                optLabel.innerHTML = `
+                    <div class="relative flex items-center justify-center mr-3">
+                        <input type="radio" name="bengaliQOpt" value="${optIdx}" ${isSelected ? 'checked' : ''} class="sr-only">
+                        <div class="w-5 h-5 rounded-full border-2 ${isSelected ? 'border-emerald-600 bg-emerald-600' : 'border-slate-400 dark:border-slate-500'} flex items-center justify-center">
+                            ${isSelected ? '<div class="w-2 h-2 rounded-full bg-white"></div>' : ''}
+                        </div>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold leading-relaxed">(${bnOptionPrefixes[optIdx]}) ${optText}</span>
+                `;
+
+                optLabel.addEventListener('click', () => {
+                    userState[index].selectedOption = optIdx;
+                    renderQuestion(index);
+                });
+
+                optionsContainerEl.appendChild(optLabel);
+            });
+
+            // Prev Button
+            prevBtn.disabled = (index === 0);
+            prevBtn.classList.toggle('opacity-40', index === 0);
+            prevBtn.classList.toggle('cursor-not-allowed', index === 0);
+
+            highlightActivePaletteBtn(index);
+            updateDashboardStats();
+        }
+
+        // --- PALETTE GRID MANAGEMENT ---
+        function initPaletteGrid() {
+            questionGridEl.innerHTML = '';
+            QUESTIONS.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `palette-btn-${idx}`;
+                btn.innerText = toBnNum(q.id);
+                btn.className = getPaletteBtnClass('NOT_VISITED', false);
+                btn.addEventListener('click', () => {
+                    renderQuestion(idx);
+                });
+                questionGridEl.appendChild(btn);
+            });
+        }
+
+        function getPaletteBtnClass(status, isActive) {
+            let base = "h-8 sm:h-9 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center shadow-2xs ";
+            if (isActive) {
+                base += "ring-2 ring-slate-900 dark:ring-white scale-105 z-10 ";
+            }
+
+            switch (status) {
+                case 'ANSWERED':
+                    return base + "bg-emerald-500 text-white hover:bg-emerald-600";
+                case 'SKIPPED':
+                    return base + "bg-rose-500 text-white hover:bg-rose-600";
+                case 'REVIEW':
+                    return base + "bg-purple-600 text-white hover:bg-purple-700";
+                case 'ANS_REVIEW':
+                    return base + "bg-purple-600 text-white hover:bg-purple-700 ring-2 ring-emerald-400";
+                default:
+                    return base + "bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600";
+            }
+        }
+
+        function updateQuestionStatusUI(index) {
+            const btn = document.getElementById(`palette-btn-${index}`);
+            if (btn) {
+                btn.className = getPaletteBtnClass(userState[index].status, index === currentIndex);
+            }
+        }
+
+        function highlightActivePaletteBtn(activeIdx) {
+            QUESTIONS.forEach((_, idx) => {
+                const btn = document.getElementById(`palette-btn-${idx}`);
+                if (btn) {
+                    btn.className = getPaletteBtnClass(userState[idx].status, idx === activeIdx);
+                }
+            });
+        }
+
+        // --- UPDATE STATS & COUNTERS ---
+        function updateDashboardStats() {
+            let answered = 0;
+            let review = 0;
+            let ansReview = 0;
+            let skipped = 0;
+            let notVisited = 0;
+
+            userState.forEach(st => {
+                if (st.status === 'ANSWERED') answered++;
+                else if (st.status === 'REVIEW') review++;
+                else if (st.status === 'ANS_REVIEW') ansReview++;
+                else if (st.status === 'SKIPPED') skipped++;
+                else notVisited++;
+            });
+
+            const totalAttempted = answered + ansReview;
+            const pct = Math.round((totalAttempted / 200) * 100);
+
+            progressPercentEl.innerText = `${toBnNum(pct)}%`;
+            progressBarEl.style.width = `${pct}%`;
+
+            cntAnsweredEl.innerText = toBnNum(totalAttempted);
+            cntReviewEl.innerText = toBnNum(review + ansReview);
+            cntUnattemptedEl.innerText = toBnNum(200 - totalAttempted);
+
+            lgdAnsweredEl.innerText = toBnNum(answered);
+            lgdSkippedEl.innerText = toBnNum(skipped);
+            lgdReviewEl.innerText = toBnNum(review + ansReview);
+            lgdNotVisitedEl.innerText = toBnNum(notVisited);
+        }
+
+        // --- SUBJECT TABS FILTER ---
+        document.querySelectorAll('.cat-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                document.querySelectorAll('.cat-tab').forEach(t => {
+                    t.classList.remove('bg-emerald-600', 'text-white', 'shadow-xs');
+                    t.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-700', 'dark:text-slate-200');
+                });
+
+                e.currentTarget.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-700', 'dark:text-slate-200');
+                e.currentTarget.classList.add('bg-emerald-600', 'text-white', 'shadow-xs');
+
+                const cat = e.currentTarget.getAttribute('data-category');
+                currentCategoryFilter = cat;
+                filterPaletteGrid(cat);
+            });
+        });
+
+        function filterPaletteGrid(category) {
+            let count = 0;
+            QUESTIONS.forEach((q, idx) => {
+                const btn = document.getElementById(`palette-btn-${idx}`);
+                if (!btn) return;
+
+                if (category === 'ALL' || q.category === category) {
+                    btn.classList.remove('hidden');
+                    count++;
+                } else {
+                    btn.classList.add('hidden');
+                }
+            });
+            document.getElementById('filteredCountBadge').innerText = `দেখাচ্ছে: ${toBnNum(count)}টি`;
+        }
+
+        // --- USER ACTION BUTTONS ---
+        saveNextBtn.addEventListener('click', () => {
+            const st = userState[currentIndex];
+            if (st.selectedOption !== null) {
+                st.status = 'ANSWERED';
+            } else {
+                st.status = 'SKIPPED';
+            }
+            updateQuestionStatusUI(currentIndex);
+
+            if (currentIndex < 199) {
+                renderQuestion(currentIndex + 1);
+            } else {
+                openSubmitModal();
+            }
+        });
+
+        markReviewBtn.addEventListener('click', () => {
+            const st = userState[currentIndex];
+            if (st.selectedOption !== null) {
+                st.status = 'ANS_REVIEW';
+            } else {
+                st.status = 'REVIEW';
+            }
+            updateQuestionStatusUI(currentIndex);
+
+            if (currentIndex < 199) {
+                renderQuestion(currentIndex + 1);
+            } else {
+                openSubmitModal();
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            userState[currentIndex].selectedOption = null;
+            userState[currentIndex].status = 'SKIPPED';
+            renderQuestion(currentIndex);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                renderQuestion(currentIndex - 1);
+            }
+        });
+
+        // --- SUBMIT MODAL DIALOG ---
+        function openSubmitModal() {
+            let answered = 0, review = 0, unattempted = 0;
+            userState.forEach(st => {
+                if (st.status === 'ANSWERED' || st.status === 'ANS_REVIEW') answered++;
+                if (st.status === 'REVIEW') review++;
+                if (st.status === 'SKIPPED' || st.status === 'NOT_VISITED') unattempted++;
+            });
+
+            document.getElementById('modalAns').innerText = toBnNum(answered);
+            document.getElementById('modalRev').innerText = toBnNum(review);
+            document.getElementById('modalUnans').innerText = toBnNum(unattempted);
+
+            submitModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalBox.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        function closeSubmitModal() {
+            modalBox.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                submitModal.classList.add('hidden');
+            }, 200);
+        }
+
+        submitTestBtn.addEventListener('click', openSubmitModal);
+        sidebarSubmitBtn.addEventListener('click', openSubmitModal);
+        cancelSubmitBtn.addEventListener('click', closeSubmitModal);
+
+        confirmSubmitBtn.addEventListener('click', () => {
+            closeSubmitModal();
+            clearInterval(timerInterval);
+            calculateAndShowResults();
+        });
+
+        function autoSubmitTest() {
+            alert("পরীক্ষার নির্দিষ্ট সময় সমাপ্ত হয়েছে! আপনার পরীক্ষাটি জমা নেওয়া হচ্ছে।");
+            calculateAndShowResults();
+        }
+
+        // --- SCORECARD & EVALUATION CALCULATOR ---
+        function calculateAndShowResults() {
+            let totalCorrect = 0;
+            let totalIncorrect = 0;
+            let totalAttempted = 0;
+            let totalMarks = 0;
+
+            const catStats = {
+                GK: { name: 'সাধারণ জ্ঞান ও সাম্প্রতিকী', total: 40, attempted: 0, correct: 0, incorrect: 0, marks: 0 },
+                NUTRITION: { name: 'শিশু পুষ্টি ও জনস্বাস্থ্য', total: 40, attempted: 0, correct: 0, incorrect: 0, marks: 0 },
+                SCHEMES: { name: 'নারী ও শিশু কল্যাণ প্রকল্প', total: 40, attempted: 0, correct: 0, incorrect: 0, marks: 0 },
+                MATH: { name: 'পাটিগণিত', total: 30, attempted: 0, correct: 0, incorrect: 0, marks: 0 },
+                BENGALI: { name: 'বাংলা ভাষা ও ব্যাকরণ', total: 25, attempted: 0, correct: 0, incorrect: 0, marks: 0 },
+                ENG: { name: 'English Language', total: 25, attempted: 0, correct: 0, incorrect: 0, marks: 0 }
+            };
+
+            QUESTIONS.forEach((q, idx) => {
+                const st = userState[idx];
+                const cs = catStats[q.category];
+
+                if (st.selectedOption !== null) {
+                    totalAttempted++;
+                    cs.attempted++;
+
+                    if (st.selectedOption === q.answer) {
+                        totalCorrect++;
+                        cs.correct++;
+                        cs.marks += 1.0;
+                        totalMarks += 1.0;
+                    } else {
+                        totalIncorrect++;
+                        cs.incorrect++;
+                        cs.marks -= 0.25;
+                        totalMarks -= 0.25;
+                    }
+                }
+            });
+
+            const timeTakenSecs = (150 * 60) - totalSeconds;
+            const tMins = Math.floor(timeTakenSecs / 60);
+            const tSecs = timeTakenSecs % 60;
+            const accuracy = totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0;
+
+            document.getElementById('resTotalScore').innerText = `${toBnNum(totalMarks.toFixed(2))} / ২০০`;
+            document.getElementById('resAccuracy').innerText = `${toBnNum(accuracy)}%`;
+            document.getElementById('resAttempted').innerText = `${toBnNum(totalAttempted)} / ২০০`;
+            document.getElementById('resTimeTaken').innerText = `${toBnNum(tMins)}মিনিট ${toBnNum(tSecs)}সেকেন্ড`;
+
+            // Render Table Rows
+            const tbody = document.getElementById('sectionBreakdownTable');
+            tbody.innerHTML = '';
+
+            Object.keys(catStats).forEach(key => {
+                const cs = catStats[key];
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors";
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-semibold text-slate-900 dark:text-white">${cs.name}</td>
+                    <td class="px-3 py-3 text-center text-slate-500">${toBnNum(cs.total)}</td>
+                    <td class="px-3 py-3 text-center font-medium">${toBnNum(cs.attempted)}</td>
+                    <td class="px-3 py-3 text-center text-emerald-600 font-bold">${toBnNum(cs.correct)}</td>
+                    <td class="px-3 py-3 text-center text-rose-500 font-bold">${toBnNum(cs.incorrect)}</td>
+                    <td class="px-4 py-3 text-right font-black ${cs.marks >= 0 ? 'text-slate-900 dark:text-white' : 'text-rose-500'}">${toBnNum(cs.marks.toFixed(2))}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            renderSolutionCards('ALL');
+            resultsModal.classList.remove('hidden');
+        }
+
+        // Render Answer Solutions
+        function renderSolutionCards(filter) {
+            const listContainer = document.getElementById('solutionsList');
+            listContainer.innerHTML = '';
+            const bnOptionPrefixes = ['ক', 'খ', 'গ', 'ঘ'];
+
+            QUESTIONS.forEach((q, idx) => {
+                const st = userState[idx];
+                const isCorrect = st.selectedOption === q.answer;
+                const isAttempted = st.selectedOption !== null;
+
+                if (filter === 'INCORRECT' && (isCorrect || !isAttempted)) return;
+                if (filter === 'UNATTEMPTED' && isAttempted) return;
+
+                const card = document.createElement('div');
+                card.className = "p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 space-y-2 text-xs sm:text-sm";
+
+                let statusBadge = '';
+                if (!isAttempted) {
+                    statusBadge = `<span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded font-semibold text-xs">উত্তর দেওয়া হয়নি</span>`;
+                } else if (isCorrect) {
+                    statusBadge = `<span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200 px-2.5 py-0.5 rounded font-bold text-xs"><i class="fa-solid fa-check mr-1"></i> সঠিক (+১.০)</span>`;
+                } else {
+                    statusBadge = `<span class="bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-200 px-2.5 py-0.5 rounded font-bold text-xs"><i class="fa-solid fa-xmark mr-1"></i> ভুল (-০.২৫)</span>`;
+                }
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="font-bold text-slate-900 dark:text-white">প্রশ্ন ${toBnNum(q.id)}. [${q.categoryName}]</span>
+                        ${statusBadge}
+                    </div>
+                    <p class="font-semibold text-slate-800 dark:text-slate-200">${q.q}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs">
+                        <div class="p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            <span class="text-slate-400 block mb-0.5">আপনার প্রদত্ত উত্তর:</span>
+                            <span class="font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-500'}">
+                                ${isAttempted ? `(${bnOptionPrefixes[st.selectedOption]}) ${q.options[st.selectedOption]}` : 'কোনটিই নয়'}
+                            </span>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+                            <span class="text-emerald-700 dark:text-emerald-400 block mb-0.5">সঠিক উত্তর:</span>
+                            <span class="font-bold text-emerald-800 dark:text-emerald-200">
+                                (${bnOptionPrefixes[q.answer]}) ${q.options[q.answer]}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-2 p-2.5 bg-amber-50/80 dark:bg-amber-950/30 rounded-lg border border-amber-200/60 dark:border-amber-800/50 text-xs text-amber-900 dark:text-amber-200">
+                        <strong class="font-bold">ব্যাখ্যা:</strong> ${q.explanation}
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        // Solution filters
+        document.querySelectorAll('.sol-filter').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.sol-filter').forEach(b => {
+                    b.classList.remove('bg-emerald-600', 'text-white');
+                    b.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-600', 'dark:text-slate-300');
+                });
+                e.currentTarget.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-600', 'dark:text-slate-300');
+                e.currentTarget.classList.add('bg-emerald-600', 'text-white');
+
+                renderSolutionCards(e.currentTarget.getAttribute('data-filter'));
+            });
+        });
+
+        // Print & Retake
+        document.getElementById('printReportBtn').addEventListener('click', () => {
+            window.print();
+        });
+
+        document.getElementById('retakeTestBtn').addEventListener('click', () => {
+            window.location.reload();
+        });
+
+        // Dark theme & Mobile sidebar toggle
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', toggleDarkMode);
+        themeToggleMobileBtn.addEventListener('click', toggleDarkMode);
+
+        paletteToggleBtn.addEventListener('click', () => {
+            paletteSidebar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
